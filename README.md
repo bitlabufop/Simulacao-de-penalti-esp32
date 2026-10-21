@@ -1,76 +1,77 @@
-# Eletroway
+<div align="center">
 
-Jogo didático desenvolvido pelos alunos do **BitLab/UFOP**.
+# ⚽🧤 Simulador de Pênaltis: Goleiro Robótico & Lançador Automatizado
+### *Physical Penalty & Free-Kick Simulator with Automated Ball Launcher and Robotic Goalkeeper*
 
-## Versão inicial
+<!-- Badges de Tecnologias e Hardware -->
+[![Arduino / ESP32](https://img.shields.io/badge/Microcontrolador-ESP32%20%7C%20Arduino-00979D?style=for-the-badge&logo=arduino&logoColor=white)](https://arduino.cc)
+[![C++](https://img.shields.io/badge/Linguagem-C%2B%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org)
+[![3D Printing](https://img.shields.io/badge/Manufatura-Impress%C3%A3o%203D%20(FDM)-FF6F00?style=for-the-badge&logo=makerbot&logoColor=white)](https://en.wikipedia.org/wiki/3D_printing)
+[![Mecatrônica](https://img.shields.io/badge/Engenharia-Mecatr%C3%B4nica%20%26%20Controle-0B2D4D?style=for-the-badge)](https://github.com)
+[![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-238636?style=for-the-badge)](https://github.com)
 
-O objetivo do jogo é levar uma argola até o fim do caminho sem encostar no fio.
+<br/>
 
-- Se a argola encostar no fio, o jogador perde e precisa recomeçar.
-- Se chegar ao final sem encostar, o jogador vence.
+<!-- Typing SVG dinâmico -->
+<a href="https://github.com/DenverCoder1/readme-typing-svg">
+  <img src="https://readme-typing-svg.demolab.com/?lines=Simula%C3%A7%C3%A3o+Mecatr%C3%B4nica+de+P%C3%AAnaltis+e+Faltas;Lan%C3%A7ador+de+Bolas+com+Ajuste+de+Pot%C3%AAncia+e+%C3%82ngulo;Goleiro+Rob%C3%B3tico+com+Movimenta%C3%A7%C3%A3o+Linear+e+Angular;Estrutura+Modular+em+Impress%C3%A3o+3D&font=Fira%20Code&center=true&width=650&height=35&color=88e788&vCenter=true&pause=800&size=16" alt="Typing SVG" />
+</a>
+
+<p align="center">
+  Sistema eletromecânico e interativo que reproduz dinâmicas reais de cobrança de pênaltis e faltas com controle automatizado de lançamento e defesa.
+</p>
+
+</div>
 
 ---
 
-## Versão melhorada
+<!-- ==================== ILUSTRAÇÃO CONCEITUAL DO PROJETO ==================== -->
+<p align="center">
+  <img src="https://github.com/DiegoTarcisio/fix-readme/raw/main/assets/images.jpg" alt="Conceito do Projeto - Goleiro e Lançador de Bola" width="250" style="border-radius: 12px;" />
+  <br/>
+  <sub><i>Esboço conceitual do sistema: posicionamento do lançador motorizado e curso de defesa do goleiro robótico na trave.</i></sub>
+</p>
 
-## Sobre o projeto
+---
 
-O **Eletroway** é um projeto educacional que transforma conceitos de atenção, coordenação motora e eletricidade básica em uma experiência prática e divertida.
+<!-- ==================== SOBRE O PROJETO ==================== -->
+<details open>
+  <summary><b>📌 Sobre o Projeto</b></summary><br/>
 
-A proposta é simples: conduzir uma argola por um trajeto metálico sem contato indevido com o fio. Ao tocar no fio, ocorre uma penalidade (reinício da partida).
+  <p align="justify">
+    O projeto consiste em uma <b>arena mecatrônica de futebol em escala física</b>, desenvolvida para simular a disputa clássica entre cobrador e goleiro em cobranças de pênaltis e faltas.
+  </p>
+  <p align="justify">
+    O sistema é composto por dois subsistemas sincronizados: um <b>Lançador Mecânico de Bolas</b> (capaz de variar velocidade, elevação e direção do chute) e um <b>Goleiro Robótico</b> posicionado sobre um trilho linear sob o travessão, capaz de se deslocar lateralmente e executar movimentos de bloqueio angular.
+  </p>
 
-## Objetivo pedagógico
+  <b>Objetivos Principais:</b>
+  <ul>
+    <li><b>Automação e Repetibilidade:</b> Testar trajetórias e forças de chute de maneira calibrada e programável.</li>
+    <li><b>Interação e Gamificação:</b> Permitir modos de disputa contra o robô (humano vs. máquina ou máquina vs. máquina).</li>
+    <li><b>Prototipagem Integrada:</b> Combinar modelagem CAD 3D, controle de motores via PWM/Step e eletrônica embarcada.</li>
+  </ul>
+</details>
 
-- Estimular foco e precisão motora.
-- Trabalhar lógica de tentativa e erro.
-- Introduzir fundamentos de circuitos elétricos de forma lúdica.
+<br/>
 
-## Regras do jogo
+<!-- ==================== ARQUITETURA E SUBSISTEMAS ==================== -->
+<details open>
+  <summary><b>⚙️ Subsistemas Mecânicos & Arquitetura</b></summary><br/>
 
-1. O jogador inicia no ponto de partida do trajeto.
-2. Deve conduzir a argola até o fim do caminho sem tocar no fio.
-3. Ao encostar no fio, a rodada é reiniciada.
-4. Vence quem completar o percurso sem penalidades.
+  ```mermaid
+  graph TD
+    subgraph Módulo Lançador
+      A[Interface de Controle / Botões] --> B[Ajuste de Ângulo e Potência]
+      B --> C[Motor de Lançamento / Rodas de Tração]
+      C --> D[Disparo da Bola]
+    end
 
-## Estrutura sugerida do projeto
+    subgraph Módulo Goleiro Robótico
+      E[Microcontrolador ESP32 / Arduino] --> F[Motor de Passo / DC - Eixo X]
+      E --> G[Servomotor - Braços e Salto]
+      F --> H[Movimento Linear no Trilho da Trave]
+      G --> I[Defesa do Goleiro]
+    end
 
-```text
-.
-├── assets/
-│   ├── audio/
-│   ├── fonts/
-│   └── images/
-├── build/
-├── config/
-├── docs/
-├── public/
-├── scripts/
-├── src/
-│   ├── core/
-│   ├── game/
-│   ├── input/
-│   ├── ui/
-│   └── utils/
-└── tests/
-```
-
-## Convenções recomendadas
-
-- `src/core`: regras centrais e ciclo do jogo.
-- `src/game`: mecânicas específicas (pontuação, reinício, estados).
-- `src/input`: leitura de entradas físicas ou digitais.
-- `src/ui`: feedback visual/sonoro e interface.
-- `src/utils`: utilitários compartilhados.
-- `tests`: testes unitários e de integração.
-- `docs`: documentação técnica e pedagógica.
-
-## Próximos passos
-
-- Definir stack principal (ex.: C++/Arduino, JavaScript, Python).
-- Adicionar instruções de montagem e execução.
-- Incluir diagrama elétrico e lista de componentes.
-- Criar testes básicos para validação das regras do jogo.
-
-## Créditos
-
-Projeto desenvolvido pelos alunos do **BitLab/UFOP**.
+    D -.->|Trajetória do Chute| I
